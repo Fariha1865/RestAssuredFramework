@@ -9,7 +9,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import setup.Setup;
-import setup.UserModel;
+import setup.Models;
 import utils.Utils;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class TestRunner extends Setup {
     @Step("Successful user login in the system")
     public void doLogin() throws ConfigurationException, InterruptedException, IOException {
         UserController userController=new UserController(prop);
-        UserModel model=new UserModel();
+        Models model=new Models();
         model.setEmail("admin@roadtocareer.net");
         model.setPassword("1234");
         Response res= userController.userLogin(model);
@@ -38,7 +38,7 @@ public class TestRunner extends Setup {
     @Step("Creating a new user in the system")
     public void createUser() throws ConfigurationException, IOException {
         UserController userController=new UserController(prop);
-        UserModel model=new UserModel();
+        Models model=new Models();
         Faker faker=new Faker();
         model.setName("Rest Assured "+ faker.name().firstName());
         model.setEmail(faker.internet().emailAddress().toLowerCase());

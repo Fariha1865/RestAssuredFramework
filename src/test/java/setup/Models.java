@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserModel {
+public class Models {
     private String email;
     private String password;
     private String name;
@@ -13,7 +13,7 @@ public class UserModel {
     private String nid;
     private String role;
 
-    public UserModel(String name, String email, String password, String phone_number, String nid, String role){
+    public Models(String name, String email, String password, String phone_number, String nid, String role){
         this.name=name;
         this.email=email;
         this.password=password;
@@ -21,7 +21,7 @@ public class UserModel {
         this.nid=nid;
         this.role=role;
     }
-    public UserModel(){
+    public Models(){
 
     }
 
