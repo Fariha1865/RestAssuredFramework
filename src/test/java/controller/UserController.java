@@ -18,7 +18,7 @@ public class UserController {
     public UserController(Properties prop){
         this.prop=prop;
     }
-    public Response userLogin(Models models) throws ConfigurationException, IOException {
+    public Response userLogin(Models models) throws IOException {
         String env = System.getProperty("env") == null ? "dev" : System.getProperty("env");
         Map<String, String> data = JsonUtils.getJsonDataAsMap("dmoney/"+env+"/DmoneyAPIData.json");
         String endPoint = data.get("createEndpoint")+"/user/login";
@@ -27,21 +27,19 @@ public class UserController {
         return response;
     }
     public Response searchUser(String userId) throws IOException {
-        Map<String, String> data = JsonUtils.getJsonDataAsMap("dmoney/dev/DmoneyAPIData.json");
-        String endPoint=  data.get("createEndpoint")+"/user/search/id/"+userId;
+        String endPoint=  prop.getProperty("baseURI")+"/user/search/id/"+userId;
         Response response = RestUtils.performSearch(endPoint, Utils.getHeaderValues(prop));
         return response;
     }
     public Response createUser(Models models) throws IOException {
-        Map<String, String> data = JsonUtils.getJsonDataAsMap("dmoney/dev/DmoneyAPIData.json");
-        String endPoint=  data.get("createEndpoint")+"/user/create";
+
+        String endPoint=  prop.getProperty("baseURI")+"/user/create";
         Response response = RestUtils.performPost(endPoint, models,Utils.getHeaderValues(prop));
         return response;
 
     }
     public Response deleteUser(String userId) throws IOException {
-        Map<String, String> data = JsonUtils.getJsonDataAsMap("dmoney/dev/DmoneyAPIData.json");
-        String endPoint=  data.get("createEndpoint")+"/user/delete/"+userId;
+        String endPoint=  prop.getProperty("baseURI")+"/user/delete/"+userId;
         Response response = RestUtils.performDelete(endPoint,Utils.getHeaderValues(prop));
         return response;
     }
